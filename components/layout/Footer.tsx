@@ -3,7 +3,7 @@ import Link from "next/link";
 import { Paintbrush, Smartphone, Mail, Shield, FileText, Info } from "lucide-react";
 import { PLAY_STORE_URL } from "./Navbar";
 
-export const SUPPORT_EMAIL = "support@paintcalculatorestimator.example.com";
+export const SUPPORT_EMAIL = "support.paintcalculatorestimat@gmail.com";
 
 export default function Footer() {
   return (
