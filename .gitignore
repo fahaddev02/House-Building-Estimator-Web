@@ -7,6 +7,9 @@
 /.next/
 /out/
 
+# vercel
+.vercel/
+
 # production
 /build
 
@@ -16,7 +19,9 @@
 
 # IDE and editors
 .idea/
-.vscode/
+
+# typescript build info
+*.tsbuildinfo
 
 # debug logs
 npm-debug.log*
