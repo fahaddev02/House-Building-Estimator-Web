@@ -204,19 +204,30 @@ function CostCalculatorContent() {
   };
 
   const sharePayload = {
-    title: "Complete Painting Cost Estimate",
+    title: "Complete Painting Cost & Budget Estimate",
     area: paintableArea ? `${paintableArea} ${areaUnit}` : undefined,
     paintRequired: `${paintQuantity} ${volumeUnit}`,
     labor: formatCurrency(breakdown.laborCost, currency),
-    materials: formatCurrency(breakdown.materialsCost, currency),
+    materials: breakdown.materialsCost > 0 ? formatCurrency(breakdown.materialsCost, currency) : undefined,
     total: formatCurrency(breakdown.totalCost, currency),
-    customSummary: `Paint Cost: ${formatCurrency(breakdown.paintCost, currency)}\nPrimer Cost: ${formatCurrency(breakdown.primerCost, currency)}\nLabor: ${formatCurrency(breakdown.laborCost, currency)}\nMaterials: ${formatCurrency(breakdown.materialsCost, currency)}\nTotal Estimated Cost: ${formatCurrency(breakdown.totalCost, currency)}`,
+    customSummary: [
+      `Paint Cost: ${formatCurrency(breakdown.paintCost, currency)} (${paintQuantity} ${volumeUnit})`,
+      includePrimer ? `Primer Cost: ${formatCurrency(breakdown.primerCost, currency)} (${primerQuantity} ${volumeUnit})` : null,
+      `Labor: ${formatCurrency(breakdown.laborCost, currency)} (${laborType === "rate" ? `${paintableArea} ${areaUnit} @ ${currency} ${laborRate}/${areaUnit}` : "Agreed Lump Sum"})`,
+      breakdown.materialsCost > 0 ? `Additional Supplies: ${formatCurrency(breakdown.materialsCost, currency)} (${materials.filter(m => m.name && m.unitPrice > 0).length} items)` : null,
+      `Total Estimated Cost: ${formatCurrency(breakdown.totalCost, currency)}`,
+    ].filter(Boolean).join("\n"),
   };
 
   const pdfData = {
     projectName: "Full Painting Cost & Material Estimate",
     calculatorType: "Cost Calculator" as const,
     currency,
+    netPaintableArea: paintableArea ? `${paintableArea} ${areaUnit}` : undefined,
+    recommendedPaint: `${paintQuantity} ${volumeUnit}`,
+    dimensions: paintableArea
+      ? `Area: ${paintableArea} ${areaUnit} | Labor: ${laborType === "rate" ? `@ ${currency} ${laborRate}/${areaUnit}` : "Fixed Lump Sum"}`
+      : undefined,
     paintCost: formatCurrency(breakdown.paintCost, currency),
     primerCost: includePrimer ? formatCurrency(breakdown.primerCost, currency) : undefined,
     laborCost: formatCurrency(breakdown.laborCost, currency),
@@ -230,6 +241,7 @@ function CostCalculatorContent() {
         total: formatCurrency(m.quantity * m.unitPrice, currency),
       })),
     totalCost: formatCurrency(breakdown.totalCost, currency),
+    notes: `Labor: ${formatCurrency(breakdown.laborCost, currency)} (${laborType === "rate" ? `Rate per ${areaUnit}` : "Fixed Lump Sum"})${includePrimer ? " | Primer Included" : ""}${breakdown.materialsCost > 0 ? ` | Supplies: ${formatCurrency(breakdown.materialsCost, currency)}` : ""}`,
   };
 
   return (
@@ -584,17 +596,21 @@ function CostCalculatorContent() {
         calculatorType="cost"
         defaultName="Painting Budget Estimate"
         projectData={{
-          dimensionsSummary: paintableArea ? `Area: ${paintableArea} ${areaUnit}` : undefined,
+          dimensionsSummary: paintableArea ? `Area: ${paintableArea} ${areaUnit}` : `${paintQuantity} ${volumeUnit} paint`,
+          area: paintableArea ? parseFloat(paintableArea) : undefined,
+          areaUnit: areaUnit,
           paintQuantity: parseFloat(paintQuantity) || 0,
           paintUnit: volumeUnit,
           totalCost: breakdown.totalCost,
           currency: currency,
-          materials: materials.map((m) => ({
-            name: m.name,
-            quantity: m.quantity,
-            unitPrice: m.unitPrice,
-          })),
-          notes: `Labor: ${formatCurrency(breakdown.laborCost, currency)}, Paint: ${formatCurrency(breakdown.paintCost, currency)}`,
+          materials: materials
+            .filter((m) => m.name && m.unitPrice > 0)
+            .map((m) => ({
+              name: m.name,
+              quantity: m.quantity,
+              unitPrice: m.unitPrice,
+            })),
+          notes: `Labor: ${formatCurrency(breakdown.laborCost, currency)}, Paint: ${formatCurrency(breakdown.paintCost, currency)}${includePrimer ? `, Primer: ${formatCurrency(breakdown.primerCost, currency)}` : ""}${breakdown.materialsCost > 0 ? `, Supplies: ${formatCurrency(breakdown.materialsCost, currency)}` : ""}`,
         }}
       />
 

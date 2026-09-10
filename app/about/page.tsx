@@ -1,7 +1,7 @@
 import React from "react";
 import Link from "next/link";
-import { Paintbrush, CheckCircle2, Smartphone, ShieldCheck, Users, ArrowRight } from "lucide-react";
-import { PLAY_STORE_URL } from "@/components/layout/Navbar";
+import { Paintbrush, CheckCircle2, ShieldCheck, Users, ArrowRight } from "lucide-react";
+import GooglePlayButton from "@/components/ui/GooglePlayButton";
 
 export default function AboutPage() {
   return (
@@ -99,15 +99,7 @@ export default function AboutPage() {
           Need offline calculations on job sites with zero cell service? Download our companion Android app on Google Play to store unlimited estimates directly on your phone.
         </p>
         <div>
-          <a
-            href={PLAY_STORE_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs transition-colors shadow-md"
-          >
-            <Smartphone className="w-4 h-4" />
-            <span>Get on Google Play</span>
-          </a>
+          <GooglePlayButton size="default" theme="dark" />
         </div>
       </div>
     </div>

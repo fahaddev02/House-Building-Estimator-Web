@@ -1,6 +1,6 @@
 import React from "react";
 import { Smartphone, CheckCircle, WifiOff, BookmarkCheck, Zap, Download } from "lucide-react";
-import { PLAY_STORE_URL } from "../layout/Navbar";
+import GooglePlayButton from "@/components/ui/GooglePlayButton";
 
 export default function AppPromoBanner() {
   const benefits = [
@@ -47,22 +47,7 @@ export default function AppPromoBanner() {
           </div>
 
           <div className="pt-4 flex flex-col sm:flex-row items-start sm:items-center gap-4">
-            <a
-              href={PLAY_STORE_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-3.5 px-6 py-3.5 rounded-2xl bg-white hover:bg-slate-100 text-slate-900 font-bold transition-all shadow-lg hover:shadow-xl hover:scale-102 group"
-            >
-              <Smartphone className="w-7 h-7 text-blue-600 group-hover:scale-110 transition-transform" />
-              <div className="text-left">
-                <div className="text-[10px] uppercase font-semibold text-slate-500 tracking-wider">
-                  Download Free On
-                </div>
-                <div className="text-base font-extrabold leading-none">
-                  Google Play Store
-                </div>
-              </div>
-            </a>
+            <GooglePlayButton size="large" theme="light" />
             <span className="text-xs text-slate-400">
               Free • Android 8.0+ • No Sign-up Needed
             </span>

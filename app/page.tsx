@@ -17,7 +17,7 @@ import {
 } from "lucide-react";
 import HeroIllustration from "@/components/ui/HeroIllustration";
 import AppPromoBanner from "@/components/ui/AppPromoBanner";
-import { PLAY_STORE_URL } from "@/components/layout/Navbar";
+import GooglePlayButton from "@/components/ui/GooglePlayButton";
 
 export default function HomePage() {
   const calculatorCards = [
@@ -115,15 +115,7 @@ export default function HomePage() {
                 <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </Link>
 
-              <a
-                href={PLAY_STORE_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-2.5 px-6 py-4 rounded-2xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-900 dark:text-white font-bold text-base border border-slate-200 dark:border-slate-700 transition-all"
-              >
-                <Smartphone className="w-5 h-5 text-blue-600 dark:text-blue-400" />
-                <span>Download App</span>
-              </a>
+              <GooglePlayButton size="large" theme="dark" />
             </div>
 
             {/* Trust points */}

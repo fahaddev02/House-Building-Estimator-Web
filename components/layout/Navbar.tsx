@@ -21,8 +21,8 @@ import {
   Maximize2,
 } from "lucide-react";
 import { CURRENCIES, CurrencyCode } from "@/lib/calculations/currency";
-
-export const PLAY_STORE_URL = "https://play.google.com/store/apps/details?id=com.example.paintcalculatorestimator";
+import { GOOGLE_PLAY_STORE_URL, PLAY_STORE_URL } from "@/lib/config/site";
+export { GOOGLE_PLAY_STORE_URL, PLAY_STORE_URL };
 
 export default function Navbar() {
   const pathname = usePathname();

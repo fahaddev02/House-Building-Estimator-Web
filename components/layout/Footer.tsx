@@ -1,9 +1,9 @@
 import React from "react";
 import Link from "next/link";
-import { Paintbrush, Smartphone, Mail, Shield, FileText, Info } from "lucide-react";
-import { PLAY_STORE_URL } from "./Navbar";
-
-export const SUPPORT_EMAIL = "support.paintcalculatorestimat@gmail.com";
+import { Paintbrush, Mail, Shield, FileText, Info } from "lucide-react";
+import GooglePlayButton from "@/components/ui/GooglePlayButton";
+import { SUPPORT_EMAIL } from "@/lib/config/site";
+export { SUPPORT_EMAIL };
 
 export default function Footer() {
   return (
@@ -117,18 +117,9 @@ export default function Footer() {
             <p className="text-xs text-slate-400 leading-relaxed">
               Calculate on-site even without internet access. Save unlimited projects and export clean PDF estimates right from your Android device.
             </p>
-            <a
-              href={PLAY_STORE_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-3 px-4 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 border border-slate-700 text-white transition-all shadow-sm group"
-            >
-              <Smartphone className="w-6 h-6 text-blue-400 group-hover:scale-110 transition-transform" />
-              <div className="text-left">
-                <div className="text-[10px] text-slate-400 uppercase tracking-wider">Get it on</div>
-                <div className="text-xs font-bold leading-tight">Google Play</div>
-              </div>
-            </a>
+            <div>
+              <GooglePlayButton size="default" theme="dark" />
+            </div>
           </div>
         </div>
 
