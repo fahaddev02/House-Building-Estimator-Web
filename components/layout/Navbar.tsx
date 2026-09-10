@@ -14,8 +14,6 @@ import {
   X,
   Smartphone,
   FolderArchive,
-  ChevronDown,
-  Layers,
   Ruler,
   DollarSign,
   Maximize2,
@@ -38,7 +36,6 @@ export default function Navbar() {
   } = useSettings();
   const { projects } = useProjects();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [settingsDropdownOpen, setSettingsDropdownOpen] = useState(false);
 
   const navLinks = [
     { href: "/", label: "Home" },
