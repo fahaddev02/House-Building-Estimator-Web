@@ -3,7 +3,6 @@ import Link from "next/link";
 import { Paintbrush, Mail, Shield, FileText, Info } from "lucide-react";
 import GooglePlayButton from "@/components/ui/GooglePlayButton";
 import { SUPPORT_EMAIL } from "@/lib/config/site";
-export { SUPPORT_EMAIL };
 
 export default function Footer() {
   return (
