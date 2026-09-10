@@ -1,6 +1,6 @@
 import React from "react";
 import { Shield } from "lucide-react";
-import { SUPPORT_EMAIL } from "@/components/layout/Footer";
+import { SUPPORT_EMAIL } from "@/lib/config/site";
 
 export default function PrivacyPolicyPage() {
   return (

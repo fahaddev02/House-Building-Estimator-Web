@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import { Mail, Send, CheckCircle2, MessageSquare, AlertCircle } from "lucide-react";
-import { SUPPORT_EMAIL } from "@/components/layout/Footer";
+import { SUPPORT_EMAIL } from "@/lib/config/site";
 
 export default function ContactPage() {
   const [name, setName] = useState("");
